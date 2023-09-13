@@ -93,3 +93,44 @@ header #todo-theme span#third-theme {
 header #todo-theme span.selected {
   outline: 2px solid #333;
 }
+
+/* todo form */
+
+form .form-control,
+form .form-control {
+  display: flex;
+  gap: .4rem;
+  align-items: flex-end;
+}
+form .control-block,
+form .control-block {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 1.1rem;
+  flex: 1;
+}
+form .control-block label,
+form .control-block label {
+  margin-bottom: .5rem;
+  cursor: pointer;
+}
+form .control-block input {width: 100%;}
+#todo-form, #edit-form {
+  padding: .5rem 1rem;
+}
+#edit-form #cancel-edit-btn {
+  margin-top: 1rem;
+  padding: .5rem 1rem;
+}
+
+/* toolbar */
+
+section#toolbar {
+  display: flex;
+  padding: .5rem 1rem;
+  gap: 1rem;
+}
+section#toolbar #seacrh {width: 70%;}
+section#toolbar #filter {width: 30%;}
+
