@@ -1,1 +1,45 @@
 @charset "UTF-8";
+
+/* global */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+body {
+  background: #83a4d4 linear-gradient(to right, #83a4d4, #b6fbff);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+button {
+  background-color: #fdfdfd;
+  color: #102f5e;
+  padding: .6rem;
+  border: 2px solid #102f5e;
+  font-size: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: .3s;
+}
+button:hover {
+  background-color: #102f5e;
+  color: #fff;
+} 
+button:hover i {color: #fff;}
+button i {
+  color: #102f5e;
+  font-weight: 700;
+  pointer-events: none;
+}
+input, select {
+  padding: .6rem;
+  flex: 1;
+  outline: none;
+}
+input:focus {outline: 1px solid #333;}
