@@ -24,31 +24,43 @@
         <span id="third-theme"></span>
       </div>
     </header>
-    <form id="todo-form">
-      <h3>Adicion a sua tarefa:</h3>
-      <div class="form-control">
-        <input type="text" id="todo-input" placeholder="Digite o que pretende fazer...">
-        <button type="submit">
-          <i class="fa-thin fa-plus"></i>
-        </button>
-      </div>
-    </form>
-    <form id="edit-form">
-      <h3>Edite a sua tarefa:</h3>
-      <div class="form-control">
-        <input type="text" id="edit-input">
-        <button type="submit">
-          <i class="fa-solid fa-check-double"></i>
-        </button>
-      </div>
-      <button type="button" id="cancel-edit-btn">Cancelar</button>
-    </form>
-    <section id="toolbar">
-      <div id="seacrh">
-        <h3>Pesquisar:</h3>
+    <section id="todo-principal">
+      <div id="todo-form">
         <form>
           <div class="form-control">
-            <input type="text" id="search-input" placeholder="Pesquisar...">
+            <div class="control-block">
+              <label for="todo-input">Adicione a sua tarefa:</label>
+              <input type="text" id="todo-input" placeholder="Digite o que pretende fazer...">
+            </div>
+            <button type="submit">
+              <i class="fa-solid fa-plus"></i>
+            </button>
+          </div>
+        </form>
+      </div>
+      <div id="edit-form" class="hide">
+        <form>
+          <div class="form-control">
+            <div class="control-block">
+              <label for="edit-input">Edite a sua tarefa:</label>
+              <input type="text" id="edit-input">
+            </div>
+            <button type="submit">
+              <i class="fa-solid fa-check-double"></i>
+            </button>
+          </div>
+          <button type="button" id="cancel-edit-btn">Cancelar</button>
+        </form>
+      </div>
+    </section>
+    <section id="toolbar">
+      <div id="seacrh">
+        <form>
+          <div class="form-control">
+            <div class="control-block">
+              <label for="search-input">Pesquisar:</label>
+              <input type="text" id="search-input" placeholder="Pesquisar...">
+            </div>
             <button type="submit" id="erase-btn">
               <i class="fa-solid fa-delete-left"></i>
             </button>
@@ -56,18 +68,22 @@
         </form>
       </div>
       <div id="filter">
-        <h3>Filtrar</h3>
-        <select id="filter-select">
-          <option value="all">Todas</option>
-          <option value="Done">Concluídas</option>
-          <option value="todo">A fazer</option>
-        </select>
+        <form>
+          <div class="control-block">
+            <label for="filter-select">Filtrar:</label>
+            <select id="filter-select" class="filter">
+              <option value="all">Todas</option>
+              <option value="Done">Concluídas</option>
+              <option value="todo">A fazer</option>
+            </select>
+          </div>
+        </form>
       </div>
     </section>
     <section id="todo-list">
       <h2>Suas tarefas</h2>
-      <div class="todo">
-        <h3>Estudar JavaScript</h3>
+      <div class="todo done">
+        <h3>Estudar JavaScript das 8:00 as 12:00</h3>
         <button type="button" class="finish-todo">
           <i class="fa-solid fa-check"></i>
         </button>
@@ -78,7 +94,7 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      <div class="todo">
+      <div class="todo done">
         <h3>Estudar ReactJS</h3>
         <button type="button" class="finish-todo">
           <i class="fa-solid fa-check"></i>
