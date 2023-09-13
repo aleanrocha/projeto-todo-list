@@ -43,3 +43,53 @@ input, select {
   outline: none;
 }
 input:focus {outline: 1px solid #333;}
+
+/* content */
+
+main {
+  background-color: #fff;
+  border-radius: 1rem;
+  width: 95%;
+  max-width: 460px;
+  padding: 1rem;
+  margin: 3rem 0;
+}
+.hide {display: none;}
+
+/* header */
+
+main header h1 {
+  padding-bottom: 1rem;
+  text-align: center;
+}
+main header #todo-theme {
+  background-image: linear-gradient(to right, #83a4d4, #b6fbff);
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .625rem;
+  border-radius: 10rem;
+  max-width: 180px;
+  margin: 0 auto 1rem;
+}
+header #todo-theme span {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: rgb(73, 71, 95);
+  cursor: pointer;
+  border: 3px solid #fff;
+  box-shadow: 1px 1px 1px;
+}
+header #todo-theme span#first-theme {
+  background: #83a4d4 linear-gradient(to right, #83a4d4, #b6fbff);
+}
+header #todo-theme span#second-theme {
+  background: #41295a linear-gradient(to right, #41295a, #2f0743);
+}
+header #todo-theme span#third-theme {
+  background: #007991 linear-gradient(to right, #007991, #78ffd6);
+}
+header #todo-theme span.selected {
+  outline: 2px solid #333;
+}
