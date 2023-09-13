@@ -134,3 +134,33 @@ section#toolbar {
 section#toolbar #seacrh {width: 70%;}
 section#toolbar #filter {width: 30%;}
 
+/* todo list */
+
+section#todo-list {
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  padding: 0 1rem .5rem;
+}
+section#todo-list h2 {
+  padding: 1rem;
+  text-align: center;
+}
+section#todo-list .todo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: .8rem;
+  justify-content: space-between;
+  transition: .5s;
+}
+section#todo-list .todo h3 {
+  flex: 1;
+  font-size: .9rem;
+}
+section#todo-list .todo.done {
+  background-color: #395169;
+  color: #fff;
+  border-radius: .5rem;
+}
+
