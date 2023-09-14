@@ -8,18 +8,39 @@
   box-sizing: border-box;
   font-family: 'Inter', sans-serif;
 }
+:root {
+  --bg-c1: #83a4d4;
+  --bg-c2: #b6fbff;
+  --bg-gradient: var(--bg-c1) linear-gradient(to right, var(--bg-c1), var(--bg-c2));
+  --text-color-1: #333;
+  --text-color-2: #fff;
+  --main-color: #fafafa;
+}
+.second-gradient {
+  --bg-c1: #41295a;
+  --bg-c2: #2f0743;
+  --bg-gradient: var(--bg-c1) linear-gradient(to right, var(--bg-c1), var(--bg-c2));
+  --main-color: #decbff49;
+  --text-color-1: #fff;
+}
+.third-gradient {
+  --bg-c1: #007991;
+  --bg-c2: #78ffd6;
+  --bg-gradient: var(--bg-c1) linear-gradient(to right, var(--bg-c1), var(--bg-c2));
+}
 body {
-  background: #83a4d4 linear-gradient(to right, #83a4d4, #b6fbff);
+  background: var(--bg-gradient);
+  color: var(--text-color-1);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }
 button {
-  background-color: #fdfdfd;
-  color: #102f5e;
+  background-color: var(--text-color-2);
+  color: var(--bg-c1);
   padding: .6rem;
-  border: 2px solid #102f5e;
+  border: 2px solid var(--bg-c1);
   font-size: 1rem;
   display: flex;
   justify-content: center;
@@ -28,12 +49,12 @@ button {
   transition: .3s;
 }
 button:hover {
-  background-color: #102f5e;
-  color: #fff;
+  background: var(--bg-c1);
+  color: var(--text-color-2);
 } 
-button:hover i {color: #fff;}
+button:hover i {color: var(--text-color-2);}
 button i {
-  color: #102f5e;
+  color: var(--bg-c1);
   font-weight: 700;
   pointer-events: none;
 }
@@ -47,7 +68,7 @@ input:focus {outline: 1px solid #333;}
 /* content */
 
 main {
-  background-color: #fff;
+  background-color: var(--main-color);
   border-radius: 1rem;
   width: 95%;
   max-width: 460px;
@@ -63,7 +84,8 @@ main header h1 {
   text-align: center;
 }
 main header #todo-theme {
-  background-image: linear-gradient(to right, #83a4d4, #b6fbff);
+  background: var(--bg-gradient);
+  color: var(--text-color-1);
   display: flex;
   align-items: center;
   gap: .8rem;
@@ -72,13 +94,14 @@ main header #todo-theme {
   max-width: 180px;
   margin: 0 auto 1rem;
 }
+.second-gradient main header #todo-theme {background: var(--main-color);}
+.third-gradient main header #todo-theme {color: var(--text-color-2);}
 header #todo-theme span {
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background-color: rgb(73, 71, 95);
   cursor: pointer;
-  border: 3px solid #fff;
+  border: 3px solid var(--text-color-2);
   box-shadow: 1px 1px 1px;
 }
 header #todo-theme span#first-theme {
@@ -91,7 +114,7 @@ header #todo-theme span#third-theme {
   background: #007991 linear-gradient(to right, #007991, #78ffd6);
 }
 header #todo-theme span.selected {
-  outline: 2px solid #333;
+  outline: 2.5px solid #333;
 }
 
 /* todo form */
@@ -159,8 +182,12 @@ section#todo-list .todo h3 {
   font-size: .9rem;
 }
 section#todo-list .todo.done {
-  background-color: #395169;
-  color: #fff;
+  background: var(--bg-gradient);
+  color: var(--text-color-1);
   border-radius: .5rem;
+  transition: .5s;
+}
+.second-gradient #todo-list button:hover {background-color: var(--main-color);}
+.third-gradient #todo-list .todo.done {color: var(--text-color-2);
 }
 
