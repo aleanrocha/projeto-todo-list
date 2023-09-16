@@ -9,6 +9,9 @@ const todoInput = document.querySelector("#todo-input")
 const editInput = document.querySelector("#edit-input")
 const cancelEditBtn = document.querySelector("#cancel-edit-btn")
 const toolbar = document.querySelector("#toolbar")
+const searchInput = document.querySelector("#search-input")
+const eraseBtn = document.querySelector("#erase-btn")
+const filter = document.querySelector("#filter-select")
 
 let oldEditInput = ""
 
@@ -88,6 +91,24 @@ const updateTodoInput = (newInputValue) => {
     }
   })
 }
+// pesquisa e exibe tarefa específica da lista de tarefas
+const getSearchTodos = (searchValue) => {
+  const todos = document.querySelectorAll(".todo")
+  let found = false
+  todos.forEach((todo) => {
+    const todoTitle = todo.querySelector("h3").innerText.toLowerCase()
+    const search = searchValue.toLowerCase()
+    todo.style.display = "flex"
+    if(!todoTitle.includes(search.trim())) {todo.style.display = "none"}
+    else {found = true} 
+    if(!found) {
+      todoListInfo.firstElementChild.innerText = "Nenhum resultado encontrado."
+      todoListInfo.classList.remove("hide")
+    } else {
+      todoListInfo.classList.add("hide")
+    }
+  })
+}
 
 // Eventos
 
@@ -108,4 +129,13 @@ todoEdit.addEventListener("submit", (e) => {
   const editInputValue = editInput.value
   if(editInputValue) updateTodoInput(editInputValue)
   editForm()
+})
+searchInput.addEventListener("keyup", (e) => {
+  const searchValue = e.target.value
+  getSearchTodos(searchValue)
+})
+eraseBtn.addEventListener("click", (e) => {
+  e.preventDefault()
+  searchInput.value = ""
+  searchInput.dispatchEvent(new Event("keyup"))
 })
