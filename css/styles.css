@@ -71,11 +71,11 @@ main {
   background-color: var(--main-color);
   border-radius: 1rem;
   width: 95%;
-  max-width: 460px;
+  max-width: 480px;
   padding: 1rem;
   margin: 3rem 0;
 }
-.hide {display: none;}
+.hide {display: none !important;}
 
 /* header */
 
@@ -145,6 +145,7 @@ form .control-block input {width: 100%;}
 #edit-form #cancel-edit-btn {
   margin-top: 1rem;
   padding: .5rem 1rem;
+  font-weight: 700;
 }
 
 /* toolbar */
@@ -162,12 +163,23 @@ section#toolbar #filter {width: 30%;}
 section#todo-list {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
+  gap: .7rem;
   padding: 0 1rem .5rem;
 }
 section#todo-list h2 {
   padding: 1rem;
   text-align: center;
+}
+section#todo-list #todo-info {
+  padding: 2rem 1rem;
+  text-align: center;
+  border-radius: 1rem;
+  border: 2.4px solid var(--bg-c1);
+  font-weight: 700;
+}
+.second-gradient section#todo-list #todo-info {
+  background: var(--main-color);
+  border: none;
 }
 section#todo-list .todo {
   display: flex;
@@ -175,19 +187,21 @@ section#todo-list .todo {
   gap: 1rem;
   padding: .8rem;
   justify-content: space-between;
-  transition: .5s;
+  box-shadow: 0 0 5px var(--bg-c1);
+  border-radius: .5rem;
+}
+.second-gradient section#todo-list .todo {
+  background: var(--main-color);
 }
 section#todo-list .todo h3 {
   flex: 1;
-  font-size: .9rem;
+  font-size: .95rem;
 }
 section#todo-list .todo.done {
   background: var(--bg-gradient);
   color: var(--text-color-1);
-  border-radius: .5rem;
-  transition: .5s;
 }
+section#todo-list .todo.done h3 {text-decoration: line-through;} 
 .second-gradient #todo-list button:hover {background-color: var(--main-color);}
 .third-gradient #todo-list .todo.done {color: var(--text-color-2);
 }
-
