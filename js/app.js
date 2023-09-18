@@ -50,6 +50,13 @@ const saveTodo = (text) => {
   if(document.querySelector("#todo-list .todo")) 
     todoListInfo.classList.add("hide")
 }
+// atualiza e exibe informações da lista de tarefas com uma mensagem
+const todoInfo = (action, message) => {
+  if(action === "remove") todoListInfo.classList.remove("hide")
+  else if (action === "toggle") todoListInfo.classList.toggle("hide")
+  else todoListInfo.classList.add("hide")
+  todoListInfo.firstElementChild.innerText = message
+}
 // edição das tarefas
 const editForm = () => {
   const todoListItems = document.querySelectorAll("#todo-list .todo")
@@ -57,8 +64,7 @@ const editForm = () => {
   todoForm.classList.toggle("hide")
   toolbar.classList.toggle("hide")
   todoListItems.forEach(todo => todo.classList.toggle("hide"))
-  todoListInfo.classList.toggle("hide")
-  todoListInfo.firstElementChild.innerText = "Editando tarefa..."
+  todoInfo("toggle", "✏️ Editando tarefa...")
 }
 // ações das tarefas
 const handleTodoActions = (e) => {
@@ -73,7 +79,7 @@ const handleTodoActions = (e) => {
   } else if (clickedEl.classList.contains("remove-todo")) {
     closestEl.remove()
     if(!document.querySelector("#todo-list .todo")) 
-      todoListInfo.classList.remove("hide")
+      todoInfo("remove", "Você não possui nenhuma tarefa ☹️")
   } else if (clickedEl.classList.contains("edit-todo")) {
     editForm()
     editInput.value = todoTitle
@@ -102,12 +108,36 @@ const getSearchTodos = (searchValue) => {
     if(!todoTitle.includes(search.trim())) {todo.style.display = "none"}
     else {found = true} 
     if(!found) {
-      todoListInfo.firstElementChild.innerText = "Nenhum resultado encontrado."
-      todoListInfo.classList.remove("hide")
+      todoInfo("remove", "Nenhum resultado encontrado 🚫")
     } else {
       todoListInfo.classList.add("hide")
     }
   })
+}
+// filtragem da lista de tarefas
+const filterTodo = (filterValue) => {
+  const todoElements = document.querySelectorAll(".todo")
+  const isAll = filterValue.toLowerCase() === "all"
+  const isDone = filterValue.toLowerCase() === "done"
+  const isTodo = filterValue.toLowerCase() === "todo"
+  let countMatching = 0
+  todoListInfo.classList.add("hide")
+  if(todoElements.length === 0) {
+    todoInfo("remove", "Você não possui nenhuma tarefa ☹️")
+    return
+  }
+  todoElements.forEach((todo) => {
+    const isTodoDone = todo.classList.contains("done")
+    if(isAll || (isDone && isTodoDone) || (isTodo && !isTodoDone)) {
+      todo.style.display = "flex"
+      countMatching++
+    } else {
+      todo.style.display = "none"
+    }
+  })
+  if(countMatching === 0) {
+    todoInfo("remove", isDone ? "⚠️ Nenhuma tarefa foi concluida." : "Todas as tarefas foram concluidas ✅")
+  }
 }
 
 // Eventos
@@ -138,4 +168,8 @@ eraseBtn.addEventListener("click", (e) => {
   e.preventDefault()
   searchInput.value = ""
   searchInput.dispatchEvent(new Event("keyup"))
+})
+filter.addEventListener("change", (e) => {
+  const filterValue = e.target.value
+  filterTodo(filterValue)
 })
