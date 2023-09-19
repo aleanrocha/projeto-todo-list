@@ -29,7 +29,7 @@ const changeTheme = (e) => {
 }
 
 // criar e adicionar as tarefas
-const saveTodo = (text) => {
+const saveTodo = (text, done = 0, save = 1) => {
   const todoElement = document.createElement("div")
   const todoTitle = document.createElement("h3")
   const btnDoneTask = document.createElement("button")
@@ -44,6 +44,9 @@ const saveTodo = (text) => {
   btnEditTask.innerHTML = `<i class="fa-solid fa-pen"></i>`
   btnDeleteTask.innerHTML = `<i class="fa-solid fa-xmark"></i>`
   todoElement.append(todoTitle,btnDoneTask,btnEditTask,btnDeleteTask)
+  // utilizando dados da localStorage
+  if(done) todoTitle.classList.add("done")
+  if(save) saveTodoLocalStorage({text, done})
   todoList.appendChild(todoElement)
   todoInput.value = ""
   todoInput.focus()
@@ -173,3 +176,24 @@ filter.addEventListener("change", (e) => {
   const filterValue = e.target.value
   filterTodo(filterValue)
 })
+
+// localStore
+
+const getTodoLocalStorage = () => {
+  const todosLocal = JSON.parse(localStorage.getItem("todos")) || []
+  return todosLocal
+}
+
+const saveTodoLocalStorage = (todo) => {
+
+  // get todos os todo da lista
+  const todos = getTodoLocalStorage()
+
+  // add os todo no arr
+
+  todos.push(todo)
+
+  // save o todo na lista
+  localStorage.setItem("todos", JSON.stringify(todos))
+
+}
