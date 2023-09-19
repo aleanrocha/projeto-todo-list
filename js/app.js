@@ -24,10 +24,16 @@ const changeTheme = (e) => {
   themes.forEach((theme) => theme.classList.remove("selected"))
   btnSelected.classList.toggle("selected")
   document.body.classList = ""
-  if(idSelected === "second-theme") {document.body.classList.add("second-gradient")
-  } else if (idSelected === "third-theme") {document.body.classList.add("third-gradient")}
+  if(idSelected === "second-theme") {
+    const theme = "second-gradient"
+    saveTodoTheme(theme)
+  } else if (idSelected === "third-theme") {
+    const theme = "third-gradient"
+    saveTodoTheme(theme)
+  } else {
+    localStorage.removeItem("theme")
+  }
 }
-
 // criar e adicionar as tarefas
 const saveTodo = (text, done = 0, save = 1) => {
   const todoElement = document.createElement("div")
@@ -218,4 +224,21 @@ const updateTodoListLocal = (oldText, newText) => {
   todos.map((todo) => todo.text === oldText ? todo.text = newText : null)
   setDataLocal("todos", todos)
 }
+// salvar o tema selecionado
+const saveTodoTheme = (theme) => {
+  setDataLocal("theme", theme)
+  loadTodoTheme()
+}
+// carrega o tema selecionado
+const loadTodoTheme = () => {
+  const themeLocal = JSON.parse(localStorage.getItem("theme"))
+  if(themeLocal) {
+    document.body.classList.add(themeLocal)
+    themes.forEach((theme) => theme.classList.remove("selected"))
+    themeLocal === "second-gradient" 
+    ? themes[1].classList.add("selected") 
+    : themes[2].classList.add("selected")
+  }
+}
 loadTodos()
+loadTodoTheme()
