@@ -45,7 +45,7 @@ const saveTodo = (text, done = 0, save = 1) => {
   btnDeleteTask.innerHTML = `<i class="fa-solid fa-xmark"></i>`
   todoElement.append(todoTitle,btnDoneTask,btnEditTask,btnDeleteTask)
   // utilizando dados da localStorage
-  if(done) todoTitle.classList.add("done")
+  if(done) todoElement.classList.add("done")
   if(save) saveTodoLocalStorage({text, done})
   todoList.appendChild(todoElement)
   todoInput.value = ""
@@ -79,6 +79,7 @@ const handleTodoActions = (e) => {
   }
   if (clickedEl.classList.contains("finish-todo")) {
     closestEl.classList.toggle("done")
+    updateTodoStatusLocal(todoTitle)
   } else if (clickedEl.classList.contains("remove-todo")) {
     closestEl.remove()
     removeTodoLocal(todoTitle)
@@ -98,6 +99,7 @@ const updateTodoInput = (newInputValue) => {
     if(todoTitle.innerText.trim() === oldEditInput) {
       if(newInputValue.trim() !== "")
         todoTitle.innerText = newInputValue
+    updateTodoListLocal(oldEditInput, newInputValue)
     }
   })
 }
@@ -178,27 +180,42 @@ filter.addEventListener("change", (e) => {
   filterTodo(filterValue)
 })
 
-// localStore
+// LocalStore
 
+// obtém os dados do localStorage
 const getTodoLocalStorage = () => {
   const todosLocal = JSON.parse(localStorage.getItem("todos")) || []
   return todosLocal
 }
+// carrega os dados 
 const loadTodos = () => {
   const todos = getTodoLocalStorage()
-  todos.forEach((todo) => {
-    saveTodo(todo.text, todo.done, 0)
-  })
-
+  todos.forEach((todo) => saveTodo(todo.text, todo.done, 0))
 }
+// seta os dados no local 
+const setDataLocal = (key, value) => {localStorage.setItem(key, JSON.stringify(value))}
+// salva todos os dados
 const saveTodoLocalStorage = (todo) => {
   const todos = getTodoLocalStorage()
   todos.push(todo)
-  localStorage.setItem("todos", JSON.stringify(todos))
+  setDataLocal("todos", todos)
 }
+// remove um dado específico
 const removeTodoLocal = (todoText) => {
   const todos = getTodoLocalStorage()
   const filteredTodos = todos.filter((todo) => todo.text !== todoText)
-  localStorage.setItem("todos", JSON.stringify(filteredTodos))
+  setDataLocal("todos", filteredTodos)
+}
+// atualiza o status das tarefas concluidas
+const updateTodoStatusLocal = (todoText) => {
+  const todos = getTodoLocalStorage()
+  todos.map((todo) => todo.text === todoText ? todo.done = !todo.done : null)
+  setDataLocal("todos", todos)
+}
+// atualiza no local a edição da tarefa
+const updateTodoListLocal = (oldText, newText) => {
+  const todos = getTodoLocalStorage()
+  todos.map((todo) => todo.text === oldText ? todo.text = newText : null)
+  setDataLocal("todos", todos)
 }
 loadTodos()
