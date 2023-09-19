@@ -81,6 +81,7 @@ const handleTodoActions = (e) => {
     closestEl.classList.toggle("done")
   } else if (clickedEl.classList.contains("remove-todo")) {
     closestEl.remove()
+    removeTodoLocal(todoTitle)
     if(!document.querySelector("#todo-list .todo")) 
       todoInfo("remove", "Você não possui nenhuma tarefa ☹️")
   } else if (clickedEl.classList.contains("edit-todo")) {
@@ -183,17 +184,21 @@ const getTodoLocalStorage = () => {
   const todosLocal = JSON.parse(localStorage.getItem("todos")) || []
   return todosLocal
 }
-
-const saveTodoLocalStorage = (todo) => {
-
-  // get todos os todo da lista
+const loadTodos = () => {
   const todos = getTodoLocalStorage()
-
-  // add os todo no arr
-
-  todos.push(todo)
-
-  // save o todo na lista
-  localStorage.setItem("todos", JSON.stringify(todos))
+  todos.forEach((todo) => {
+    saveTodo(todo.text, todo.done, 0)
+  })
 
 }
+const saveTodoLocalStorage = (todo) => {
+  const todos = getTodoLocalStorage()
+  todos.push(todo)
+  localStorage.setItem("todos", JSON.stringify(todos))
+}
+const removeTodoLocal = (todoText) => {
+  const todos = getTodoLocalStorage()
+  const filteredTodos = todos.filter((todo) => todo.text !== todoText)
+  localStorage.setItem("todos", JSON.stringify(filteredTodos))
+}
+loadTodos()
